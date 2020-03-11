@@ -85,30 +85,79 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+{
+title: 'The Rossiest of Bobs',
+date: 'November 5th, 1990',
+firstParagraph: `And maybe, maybe, maybe... Let's make some happy little clouds in our world. Don't be afraid to make these big decisions. Once you start, they sort of just make themselves. If I paint something, I don't want to have to explain what it is.`,
+secondParagraph: `A little happy sunlight shining through there. This is a fantastic little painting. See there, told you that would be easy. Let the paint work.`,
+thirdParagraph: `Van Dyke Brown is a very nice brown, it's almost like a chocolate brown. It takes dark in order to show light. But we're not there yet, so we don't need to worry about it. I guess I'm a little weird. I like to talk to trees and animals. That's okay though; I have more fun than most people.`
+}
 ];
 
-/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
+// Step 1: Create a function that creates a component. You will want your component to look like the template below: 
+
+function cardCreator(data){
+  const articleCard = document.createElement('div')
+  const articleTitle = document.createElement('h2')
+  const datePara = document.createElement('p')
+  const contentPara = document.createElement('p')
+  const contentPara2 = document.createElement('p')
+  const contentPara3 = document.createElement('p')
+  const expandButton = document.createElement('span') 
+
+  articleCard.classList.add('article')
+  datePara.classList.add('date')
+  expandButton.classList.add('expandButton')
+
+  articleTitle.textContent = data.title;
+  datePara.textContent = data.date;
+  contentPara.textContent = data.firstParagraph;
+  contentPara2.textContent = data.secondParagraph;
+  contentPara2.textContent = data.thirdParagraph;
+  expandButton.textContent = '\u21A1';
+
+  articleCard.appendChild(articleTitle)
+  articleCard.appendChild(datePara)
+  articleCard.appendChild(contentPara)
+  articleCard.appendChild(contentPara2)
+  articleCard.appendChild(contentPara3)
+  articleCard.appendChild(expandButton)
+
+  //   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+  expandButton.addEventListener('click', () => {
+    articleCard.classList.toggle('article-open')
+  })
+
+  return articleCard
+}
+
+const articles = document.querySelector('.articles')
+
+data.forEach(item => {
+  articles.appendChild(cardCreator(item))
+})
+
   
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
+//   <div class="article">
+//     <h2>{title of the article}</h2>
+//     <p class="date">{date of the article}</p>
 
-    {three separate paragraph elements}
+//     {three separate paragraph elements}
 
-    <span class='expandButton'></span>
-  </div>
+//     <span class='expandButton'></span>
+//   </div>
 
-  Hint: You will need to use createElement more than once here!
+//   Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+//   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+//   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
-  Step 3: return the entire component.
+//   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+//   Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+//   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
-*/
+
